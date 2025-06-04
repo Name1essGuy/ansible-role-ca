@@ -71,4 +71,3 @@ Author Information
 ------------------
 
 GitHub: https://github.com/Name1essGuy
-Ansible-Galaxy: https://galaxy.ansible.com/ui/standalone/namespaces/22123/
