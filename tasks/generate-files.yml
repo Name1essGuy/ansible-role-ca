@@ -1,0 +1,9 @@
+---
+
+- name: Generate server key, cert and dh parameters
+  ansible.builtin.command: "./easyrsa build-server-full server nopass"
+  args:
+    chdir: "{{ ca_dir }}"
+  environment:
+    EASYRSA_PASSIN: "pass:{{ ca_password }}"
+  become_user: "{{ ca_username }}"

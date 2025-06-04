@@ -1,0 +1,24 @@
+---
+
+- name: Install packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    update_cache: true
+  loop: "{{ packages }}"
+
+- name: Create service group
+  ansible.builtin.group:
+    name: "{{ ca_group }}"
+    state: present
+    system: yes
+
+- name: Create service user
+  ansible.builtin.user:
+    name: "{{ ca_username }}"
+    comment: service account for easy-rsa
+    group: "{{ ca_group }}"
+    shell: /usr/sbin/nologin #/sbin/nologin
+    home: "/nonexistent"
+    password: "{{ ca_user_password | password_hash('sha512') }}"
+    system: yes
+

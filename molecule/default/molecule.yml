@@ -1,0 +1,40 @@
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: ca-test-instance
+    image: "ubuntu:22.04"
+    pre_build_image: false
+    dockerfile: |
+      FROM ubuntu:22.04
+      RUN apt-get update && \
+          apt-get install -y python3 sudo && \
+          rm -rf /var/lib/apt/lists/*
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        ansible_connection: docker
+        ansible_user: root
+        rsa_country: "RU"
+        rsa_province: "Moscow"
+        rsa_city: "Moscow City"
+        rsa_org: "Example Inc"
+        rsa_email: "admin@examplecom"
+        rsa_ou: "IT"
+        ca_group: "ca-ops"
+        ca_username: "ca-admin"
+        ca_user_password: "password"
+        ca_name: "example"
+        ca_dir: "/etc/CA/server"
+        ca_password: "password"
+        required_packages:
+          - "easy-rsa"
+        required_groups:
+          - "{{ ca_group }}"
+        required_users:
+          - "{{ ca_username }}"
+verifier: 
+  name: ansible

@@ -1,0 +1,22 @@
+---
+
+- name: Remove CA files
+  ansible.builtin.file:
+    path: "{{ ca_dir }}"
+    state: absent
+
+- name: Remove CA system user
+  ansible.builtin.user:
+    name: "{{ ca_username }}"
+    state: absent
+    remove: yes
+
+- name: Remove CA system group
+  ansible.builtin.group:  
+    name: "{{ ca_group }}"  
+    state: absent
+
+- name: Uninstall packages
+  ansible.builtin.package:  
+    name: easy-rsa  
+    state: absent

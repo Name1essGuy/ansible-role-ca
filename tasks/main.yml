@@ -1,0 +1,8 @@
+---
+
+- name: Play all tasks from role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - easy-rsa.yml
+    - build-ca.yml
+    - generate-files.yml

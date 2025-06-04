@@ -1,0 +1,23 @@
+---
+
+- name: Test role (default parameters)
+  vars:
+    rsa_country: RUS
+    rsa_province: Moscow
+    rsa_city: Moscow City
+    rsa_org: NamelessInc
+    rsa_email: noname@company.org
+    rsa_ou: Marketing
+    ca_group: ca-ops
+    ca_username: ca-admin
+    ca_user_password: password
+    ca_name: SomeName
+    ca_dir: /etc/CA/server
+    ca_password: password
+
+  role:
+    - CA
+
+  tasks:
+    - name: Launch tests
+      ansible.builtin.import_playbook: "test.yml"
