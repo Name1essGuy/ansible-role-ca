@@ -1,5 +1,0 @@
----
-
-dependencies:
-  - name: molecule-docker
-    version: 2.0.0
